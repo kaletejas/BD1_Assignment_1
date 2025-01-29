@@ -262,6 +262,19 @@ app.get('/products/sort/price-low-to-high',(req,res)=>{
   res.json({products: sortedProducts});
 })
 
+//fn 4
+function filterByRam(product,ram){
+  return product.ram === ram;
+}
+//Endpoint 4: Filter the products based on the “RAM” option
+app.get('/products/filter/ram',(req,res)=>{
+  let ram = parseInt(req.query.ram);
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.filter((product) => filterByRam(product,ram));
+  res.json({products: sortedProducts});
+})
+
+
 
 
 

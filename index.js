@@ -286,7 +286,17 @@ app.get('/products/filter/rom',(req,res)=>{
   res.json({products: sortedProducts});
 })
 
-
+//fn 6
+function filterByBrand(product, brand){
+  return product.brand.toLowerCase() === brand.toLowerCase();
+}
+//Endpoint 6: Filter the products based on the “Brand” option
+app.get('/products/filter/brand',(req,res)=>{
+  let brand = req.query.brand;
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.filter(product => filterByBrand(product, brand));
+  res.json({products : sortedProducts});
+})
 
 
 app.listen(port, () => {

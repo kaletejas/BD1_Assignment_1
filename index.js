@@ -260,7 +260,7 @@ app.get('/products/sort/price-low-to-high',(req,res)=>{
   let prodCopy = products.slice();
   let sortedProducts = prodCopy.sort(sortByPriceLowToHigh);
   res.json({products: sortedProducts});
-})
+}) 
 
 //fn 4
 function filterByRam(product,ram){
@@ -274,6 +274,17 @@ app.get('/products/filter/ram',(req,res)=>{
   res.json({products: sortedProducts});
 })
 
+//fn 5
+function filterByRom(product, rom){
+  return product.rom === rom;
+}
+//Endpoint 5: Filter the products based on the “ROM” option
+app.get('/products/filter/rom',(req,res)=>{
+  let rom = parseInt(req.query.rom);
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.filter(product => filterByRom(product, rom));
+  res.json({products: sortedProducts});
+})
 
 
 

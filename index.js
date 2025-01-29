@@ -298,6 +298,18 @@ app.get('/products/filter/brand',(req,res)=>{
   res.json({products : sortedProducts});
 })
 
+//fn 7
+function filterByOs(product, os){
+  return product.os.toLowerCase() === os.toLowerCase();
+}
+
+//Endpoint 7: Filter the products based on the “OS” option
+app.get('/products/filter/os',(req,res)=>{
+  let os = req.query.os;
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.filter(product => filterByOs(product, os));
+  res.json({products : sortedProducts});
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

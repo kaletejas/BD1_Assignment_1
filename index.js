@@ -241,17 +241,26 @@ app.get('/products/sort/popularity', (req, res) => {
 });
 
 //fn 2
-function sortByPrice(p1,p2){
+function sortByPriceHighToLow(p1,p2){
   return p2.price - p1.price;
 }
 //Endpoint 2: Get the products sorted by “high-to-low” price
 app.get('/products/sort/price-high-to-low',(req,res)=>{
   let prodCopy = products.slice();
-  let sortedProducts = prodCopy.sort(sortByPrice);
+  let sortedProducts = prodCopy.sort(sortByPriceHighToLow);
   res.json({products: sortedProducts});
 })
 
-
+//fn 3
+function sortByPriceLowToHigh(p1,p2){
+  return p1.price - p2.price;
+}
+//Endpoint 3: Get the products sorted by “low-to-high” price
+app.get('/products/sort/price-low-to-high',(req,res)=>{
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.sort(sortByPriceLowToHigh);
+  res.json({products: sortedProducts});
+})
 
 
 

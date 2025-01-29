@@ -4,6 +4,7 @@ const { resolve } = require('path');
 const app = express();
 const port = 3000;
 let cors = require('cors');
+const res = require('express/lib/response');
 app.use(cors());
 
 let products = [
@@ -228,17 +229,33 @@ let products = [
     camera: 108,
   },
 ];
-
+//fn 1
 function sortByPopularity(p1, p2) {
   return p2.rating - p1.rating;
 }
+//Endpoint 1: Get the products sorted by popularity
 app.get('/products/sort/popularity', (req, res) => {
   let prodCopy = products.slice();
   let sortedProducts = prodCopy.sort(sortByPopularity);
   res.json({ products: sortedProducts });
 });
 
-console.log(products);
+//fn 2
+function sortByPrice(p1,p2){
+  return p2.price - p1.price;
+}
+//Endpoint 2: Get the products sorted by “high-to-low” price
+app.get('/products/sort/price-high-to-low',(req,res)=>{
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.sort(sortByPrice);
+  res.json({products: sortedProducts});
+})
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

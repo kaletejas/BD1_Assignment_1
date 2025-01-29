@@ -311,6 +311,22 @@ app.get('/products/filter/os',(req,res)=>{
   res.json({products : sortedProducts});
 })
 
+//fn 8
+function filterByPrice(product, price){
+  return product.price === price;
+}
+//Endpoint 8: Filter the products based on the “Price” option
+app.get('/products/filter/price',(req,res)=>{
+  let price = parseFloat(req.query.price);
+  let prodCopy = products.slice();
+  let sortedProducts = prodCopy.filter(product => filterByPrice(product, price));
+  res.json({product : sortedProducts});
+})
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+//EndPoint 9 products
+app.get('/products',(req,res)=>{
+  res.json(products);
+})
